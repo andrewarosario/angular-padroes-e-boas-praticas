@@ -1,0 +1,15 @@
+<div class="todo-container">
+  <input
+    type="checkbox"
+    [checked]="todo.isCompleted"
+    (change)="markComplete.emit($event.target.checked)"
+  />
+  <span
+    [ngClass]="{'completed': todo.isCompleted}"
+    class="todo-title"
+  >
+   {{todo.title}}
+  </span>
+
+  <button (click)=remove.emit(todo.id)>X</button>
+</div>

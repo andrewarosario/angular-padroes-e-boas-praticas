@@ -1,0 +1,8 @@
+.todo-container {
+  border: 1px black solid;
+  padding: 3px;
+  width: 100%;
+}
+.completed {
+  text-decoration: line-through;
+}
