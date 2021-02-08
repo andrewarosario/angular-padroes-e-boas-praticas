@@ -13,17 +13,10 @@ export class TodosFacade {
   constructor(
     private api: TodosApi,
     private state: TodosState
-  ) {
-    this.loadAll();
-  }
+  ) { }
 
-  get completedTodos$(): Observable<Todo[]> {
-    return this.state.completedTodos$;
-  }
-
-  get uncompletedTodos$(): Observable<Todo[]> {
-    return this.state.uncompletedTodos$;
-  }
+  completedTodos$: Observable<Todo[]> = this.state.completedTodos$;
+  uncompletedTodos$: Observable<Todo[]> = this.state.uncompletedTodos$;
 
   async loadAll() {
     this.state.todos = await this.api.getAll();

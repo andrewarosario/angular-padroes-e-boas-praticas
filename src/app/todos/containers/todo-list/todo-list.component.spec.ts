@@ -5,10 +5,13 @@ import { By, BrowserModule } from '@angular/platform-browser';
 import { TodoComponent } from '../../components/todo/todo.component';
 import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { TodoAddFormComponent } from '../../components/todo-add-form/todo-add-form.component';
+import { TodosFacade } from '../../todos.facade';
+import { mockCompletedTodos$, mockUncompletedTodos$ } from '../../mocks/todos.mock';
 
 describe('TodoListComponent', () => {
   let component: TodoListComponent;
   let fixture: ComponentFixture<TodoListComponent>;
+  let facade: TodosFacade;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
@@ -17,6 +20,16 @@ describe('TodoListComponent', () => {
           BrowserModule, 
           ReactiveFormsModule,
           HttpClientTestingModule
+      ],
+      providers: [
+          { 
+              provide: TodosFacade, 
+              useValue: { 
+                  completedTodos$: mockCompletedTodos$,
+                  uncompletedTodos$: mockUncompletedTodos$,
+                  loadAll: () => {}
+              } 
+          }
       ]})
     .compileComponents();
   });
@@ -24,11 +37,22 @@ describe('TodoListComponent', () => {
   beforeEach(() => {
     fixture = TestBed.createComponent(TodoListComponent);
     component = fixture.componentInstance;
+    facade = TestBed.get(TodosFacade);
     fixture.detectChanges();
   });
 
   it('should create', () => {
     expect(component).toBeTruthy();
+  });
+
+  it('should contain a "p" title tag with uncompleted todos', () => {
+    const elements = fixture.debugElement.queryAll(By.css('p'));
+    expect(elements[0].nativeElement.innerText.trim()).toEqual('Uncompleted todos:')
+  });
+
+  it('should contain a "p" title tag with completed todos', () => {
+    const elements = fixture.debugElement.queryAll(By.css('p'));
+    expect(elements[1].nativeElement.innerText.trim()).toEqual('Completed todos:')
   });
 
   describe('AddTodo Form', () => {
@@ -51,6 +75,14 @@ describe('TodoListComponent', () => {
 
         expect(component.onAddTodo).toHaveBeenCalledWith('text');
     });
+  })
+
+  describe('Todo List', () => {
+      it('should call facade.loadAll on init', () => {
+        spyOn(facade, 'loadAll');
+        component.ngOnInit();
+        expect(facade.loadAll).toHaveBeenCalled();
+      })
   })
 
 });

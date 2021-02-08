@@ -15,10 +15,14 @@ export class TodoListComponent {
   // optimization, rerenders only todos that change instead of the entire list of todos
   todosTrackFn = (i, todo) => todo.id;
 
-  constructor(public todosFacade: TodosFacade) {}
+  constructor(public facade: TodosFacade) {}
+
+  ngOnInit() {
+    this.facade.loadAll();
+  }
 
   onAddTodo(title: string) {
-    this.todosFacade.addTodo(title);
+    this.facade.addTodo(title);
     this.todoAddForm.setValue('');
   }
 

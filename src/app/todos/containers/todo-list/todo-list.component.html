@@ -9,10 +9,10 @@
   <p>Uncompleted todos:</p>
 
   <app-todo
-    *ngFor="let todo of todosFacade.uncompletedTodos$ | async; trackBy: todosTrackFn"
+    *ngFor="let todo of facade.uncompletedTodos$ | async; trackBy: todosTrackFn"
     [todo]="todo"
-    (markComplete)="todosFacade.setCompleted(todo.id, $event)"
-    (remove)="todosFacade.removeTodo($event)"
+    (markComplete)="facade.setCompleted(todo.id, $event)"
+    (remove)="facade.removeTodo($event)"
   ></app-todo>
 </div>
 
@@ -23,10 +23,10 @@
   <p>Completed todos:</p>
 
   <app-todo
-    *ngFor="let todo of todosFacade.completedTodos$ | async; trackBy: todosTrackFn"
+    *ngFor="let todo of facade.completedTodos$ | async; trackBy: todosTrackFn"
     [todo]="todo"
-    (markComplete)="todosFacade.setCompleted(todo.id, $event)"
-    (remove)="todosFacade.removeTodo($event)"
+    (markComplete)="facade.setCompleted(todo.id, $event)"
+    (remove)="facade.removeTodo($event)"
   ></app-todo>
 </div>
 
