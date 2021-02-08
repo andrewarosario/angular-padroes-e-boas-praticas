@@ -4,11 +4,13 @@ import { TodoComponent } from './components/todo/todo.component';
 import { TodosRoutingModule } from './todos-routing.module';
 import { SharedModule } from '../shared/shared.module';
 import { ReactiveFormsModule } from '@angular/forms';
+import { TodoAddFormComponent } from './components/todo-add-form/todo-add-form.component';
 
 @NgModule({
   declarations: [
     TodoListComponent,
-    TodoComponent
+    TodoComponent,
+    TodoAddFormComponent
   ],
   imports: [
     SharedModule,

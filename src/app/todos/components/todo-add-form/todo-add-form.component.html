@@ -1,0 +1,3 @@
+<input [formControl]="todoAddForm" type="text" placeholder="Todo title...">
+
+<button [disabled]="todoAddForm.invalid" (click)="onAddTodo.emit(todoAddForm.value)">ADD</button>
