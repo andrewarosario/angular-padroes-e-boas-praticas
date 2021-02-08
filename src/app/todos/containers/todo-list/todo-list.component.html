@@ -1,7 +1,8 @@
-
-<input [formControl]="todoAddForm" type="text" placeholder="Todo title...">
-
-<button [disabled]="todoAddForm.invalid" (click)="onAddTodo(todoAddForm.value)">ADD</button>
+<app-todo-add-form
+  [todoAddForm]="todoAddForm"
+  (onAddTodo)="onAddTodo($event)"
+>
+</app-todo-add-form>
 
 <div class="all-todos">
 

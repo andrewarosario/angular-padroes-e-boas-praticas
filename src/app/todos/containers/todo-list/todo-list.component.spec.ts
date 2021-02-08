@@ -4,6 +4,7 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { By, BrowserModule } from '@angular/platform-browser';
 import { TodoComponent } from '../../components/todo/todo.component';
 import { HttpClientTestingModule } from '@angular/common/http/testing';
+import { TodoAddFormComponent } from '../../components/todo-add-form/todo-add-form.component';
 
 describe('TodoListComponent', () => {
   let component: TodoListComponent;
@@ -11,7 +12,7 @@ describe('TodoListComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ TodoListComponent, TodoComponent ],
+      declarations: [ TodoListComponent, TodoComponent, TodoAddFormComponent ],
       imports: [ 
           BrowserModule, 
           ReactiveFormsModule,
@@ -30,13 +31,7 @@ describe('TodoListComponent', () => {
     expect(component).toBeTruthy();
   });
 
-  describe('Add ToDo Form', () => {
-    it('should call onAddTodo method', () => {
-        spyOn(component, 'onAddTodo');
-        const buttonElement: HTMLElement = fixture.debugElement.query(By.css('button')).nativeElement;
-        buttonElement.click();
-        expect(component.onAddTodo).toHaveBeenCalledTimes(0);
-    });
+  describe('AddTodo Form', () => {
 
     it('form should be invalid', () => {
         component.todoAddForm.setValue('');
@@ -46,6 +41,15 @@ describe('TodoListComponent', () => {
     it('form should be valid', () => {
         component.todoAddForm.setValue('text');
         expect(component.todoAddForm.valid).toBeTruthy();
+    });
+
+    it('should call onAddTodo method', () => {
+
+        spyOn(component, 'onAddTodo');
+        const todoAddFormComponent = fixture.debugElement.query(By.directive(TodoAddFormComponent)).componentInstance; 
+        todoAddFormComponent.onAddTodo.emit('text')
+
+        expect(component.onAddTodo).toHaveBeenCalledWith('text');
     });
   })
 
