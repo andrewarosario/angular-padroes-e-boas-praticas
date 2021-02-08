@@ -1,7 +1,7 @@
 
-<input (keyup.enter)="onAddTodo(todoTitleInput.value)" #todoTitleInput type="text" placeholder="Todo title...">
+<input [formControl]="todoAddForm" type="text" placeholder="Todo title...">
 
-<button (click)="onAddTodo(todoTitleInput.value)">ADD</button>
+<button [disabled]="todoAddForm.invalid" (click)="onAddTodo(todoAddForm.value)">ADD</button>
 
 <div class="all-todos">
 
