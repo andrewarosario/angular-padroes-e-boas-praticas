@@ -6,7 +6,8 @@ import { TodoComponent } from '../../components/todo/todo.component';
 import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { TodoAddFormComponent } from '../../components/todo-add-form/todo-add-form.component';
 import { TodosFacade } from '../../todos.facade';
-import { mockCompletedTodos$, mockUncompletedTodos$ } from '../../mocks/todos.mock';
+import { todosFacadeStub } from '../../mocks/todos-facade.mock';
+import { mockUncompletedTodos, mockCompletedTodos } from '../../mocks/todos.mock';
 
 describe('TodoListComponent', () => {
   let component: TodoListComponent;
@@ -24,11 +25,7 @@ describe('TodoListComponent', () => {
       providers: [
           { 
               provide: TodosFacade, 
-              useValue: { 
-                  completedTodos$: mockCompletedTodos$,
-                  uncompletedTodos$: mockUncompletedTodos$,
-                  loadAll: () => {}
-              } 
+              useValue: todosFacadeStub
           }
       ]})
     .compileComponents();
@@ -38,7 +35,6 @@ describe('TodoListComponent', () => {
     fixture = TestBed.createComponent(TodoListComponent);
     component = fixture.componentInstance;
     facade = TestBed.get(TodosFacade);
-    fixture.detectChanges();
   });
 
   it('should create', () => {
@@ -68,21 +64,43 @@ describe('TodoListComponent', () => {
     });
 
     it('should call onAddTodo method', () => {
-
         spyOn(component, 'onAddTodo');
         const todoAddFormComponent = fixture.debugElement.query(By.directive(TodoAddFormComponent)).componentInstance; 
         todoAddFormComponent.onAddTodo.emit('text')
-
         expect(component.onAddTodo).toHaveBeenCalledWith('text');
     });
   })
 
   describe('Todo List', () => {
-      it('should call facade.loadAll on init', () => {
+      it('should call "facade.loadAll" on init', () => {
         spyOn(facade, 'loadAll');
         component.ngOnInit();
         expect(facade.loadAll).toHaveBeenCalled();
       })
-  })
+
+      it('should show todos list', async () => {
+        fixture.detectChanges();
+        const uncompletedTodos = fixture.nativeElement.querySelectorAll('.uncompleted-todos');
+        const completedTodos = fixture.nativeElement.querySelectorAll('.completed-todos');
+        expect(uncompletedTodos.length).toBe(mockUncompletedTodos.length);
+        expect(completedTodos.length).toBe(mockCompletedTodos.length);
+      });
+
+      it('should call "facade.setCompleted" method on toggle todo', () => {
+        fixture.detectChanges();
+        spyOn(facade, 'setCompleted');
+        const todoComponent = fixture.debugElement.query(By.directive(TodoComponent)).componentInstance; 
+        todoComponent.markComplete.emit(true)
+        expect(facade.setCompleted).toHaveBeenCalledWith(todoComponent.todo.id, true);
+      });
+
+      it('should call "facade.removeTodo" method on remove todo', () => {
+        fixture.detectChanges();
+        spyOn(facade, 'removeTodo');
+        const todoComponent = fixture.debugElement.query(By.directive(TodoComponent)).componentInstance; 
+        todoComponent.remove.emit(todoComponent.todo.id)
+        expect(facade.removeTodo).toHaveBeenCalledWith(todoComponent.todo.id);
+      });
+  });
 
 });
