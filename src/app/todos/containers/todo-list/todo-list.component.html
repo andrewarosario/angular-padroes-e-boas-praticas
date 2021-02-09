@@ -9,6 +9,7 @@
   <p>Uncompleted todos:</p>
 
   <app-todo
+    class="uncompleted-todos"
     *ngFor="let todo of facade.uncompletedTodos$ | async; trackBy: todosTrackFn"
     [todo]="todo"
     (markComplete)="facade.setCompleted(todo.id, $event)"
@@ -23,6 +24,7 @@
   <p>Completed todos:</p>
 
   <app-todo
+    class="completed-todos"
     *ngFor="let todo of facade.completedTodos$ | async; trackBy: todosTrackFn"
     [todo]="todo"
     (markComplete)="facade.setCompleted(todo.id, $event)"
