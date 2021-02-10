@@ -14,3 +14,5 @@ export const mockCompletedTodos: Todo[] = [
     { id: '444', title: 'test4', isCompleted: true },
     { id: '555', title: 'test5', isCompleted: true },
 ];
+
+export const mockAllTodos: Todo[] = [ ...mockUncompletedTodos, ...mockCompletedTodos ];
