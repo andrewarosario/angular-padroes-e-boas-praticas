@@ -19,7 +19,7 @@ export class TodosApi {
     return this.http.post<Todo>(`${this.apiBaseUrl}/todos`, todo).toPromise();
   }
 
-  remove(id) {
+  remove(id: string) {
     return this.http.delete(`${this.apiBaseUrl}/todos/${id}`).toPromise();
   }
 
