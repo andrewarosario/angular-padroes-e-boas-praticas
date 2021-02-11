@@ -7,5 +7,6 @@ export const todosFacadeStub: Partial<TodosFacade> = {
     uncompletedTodos$: of(mockUncompletedTodos),
     loadAll: async () => {},
     setCompleted: async (id: string, isCompleted: boolean) => {},
-    removeTodo: async (id: string) => {}
+    removeTodo: async (id: string) => {},
+    addTodo: async (title: string) => {}
 }
