@@ -69,6 +69,18 @@ describe('TodoListComponent', () => {
         todoAddFormComponent.onAddTodo.emit('text')
         expect(component.onAddTodo).toHaveBeenCalledWith('text');
     });
+
+    it('should call "facade.addTodo" on add a todo', () => {
+      spyOn(facade, 'addTodo');
+      component.onAddTodo('text');
+      expect(facade.addTodo).toHaveBeenCalledWith('text');
+    });
+
+    it('should clear the form on add a todo', () => {
+      component.onAddTodo('text');
+      expect(component.todoAddForm.value).toBe('');
+      expect(component.todoAddForm.valid).toBeFalsy();
+    });
   })
 
   describe('Todo List', () => {
