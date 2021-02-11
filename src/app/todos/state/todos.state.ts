@@ -38,16 +38,17 @@ export class TodosState {
     this._todos.next(val);
   }
 
-  public addTodo(todo: Todo) {
+  public addTodo(todo: Todo): Todo {
     const currentValue = this.todos;
     this.todos = [ ...currentValue, todo ];
+    return todo;
   }
 
-  public removeTodo(id: string) {
+  public removeTodo(id: string): void {
     this.todos = this.todos.filter(t => t.id !== id);
   }
 
-  public setCompleted(id: string, isCompleted: boolean) {
+  public setCompleted(id: string, isCompleted: boolean): Todo {
     const todo = this.getById(id);
 
     if (todo) {
@@ -59,15 +60,17 @@ export class TodosState {
       };
 
       this.todos = [...this.todos];
+      return this.todos[index];
     }
   }
 
-  public updateId(todo: Todo, idTmp: string) {
+  public updateId(todo: Todo, idTmp: string): Todo {
     const index = this.todos.indexOf(this.getById(idTmp));
     this.todos[index] = {
       ...todo
     };
 
     this.todos = [...this.todos];
+    return this.todos[index];
   }
 }
