@@ -1,6 +1,7 @@
 import { TodosState } from "./todos.state";
 import { TestBed } from '@angular/core/testing';
-import { mockAllTodos, mockUncompletedTodos, mockCompletedTodos } from '../mocks/todos.mock';
+import { mockAllTodos, mockUncompletedTodos, mockCompletedTodos, mockTodo } from '../mocks/todos.mock';
+import { take } from 'rxjs/operators';
 
 describe('TodosState', () => {
     let service: TodosState;
@@ -39,6 +40,45 @@ describe('TodosState', () => {
             done();
         })
     });
+
+    it('should add todo', () => {
+        const todo = service.addTodo(mockTodo);
+        expect(service.todos.length).toEqual(mockAllTodos.length + 1);
+        expect(service.todos).toEqual([ ...mockAllTodos, mockTodo ]);
+        expect(todo).toEqual(mockTodo);
+    });
+
+    it('should remove todo', () => {
+        service.removeTodo(mockAllTodos[1].id);
+        expect(service.todos.length).toEqual(mockAllTodos.length - 1);
+        expect(service.todos).not.toContain(mockAllTodos[1]);
+    });
+
+    it('should return todo by specific id', () => {
+        const id = mockAllTodos[2].id;
+        const todo = service.getById(id);
+        expect(todo.id).toEqual(mockAllTodos[2].id);
+        expect(todo).toEqual(mockAllTodos[2]);
+    });
+
+    it('should set todo as completed', () => {
+        const todoInserted = service.addTodo(mockTodo);
+        const todo = service.setCompleted(todoInserted.id, true);
+        expect(todo.isCompleted).toBe(true);
+    });
+
+    it('should set todo as uncompleted', () => {
+        const todoInserted = service.addTodo(mockTodo);
+        const todo = service.setCompleted(todoInserted.id, false);
+        expect(todo.isCompleted).toBe(false);
+    });
+
+    it('should update the id of a todo', () => {
+        const todoInserted = service.addTodo(mockTodo);
+        todoInserted.id = 'xxx'
+        const todo = service.updateId(todoInserted, todoInserted.id);
+        expect(todo.id).toBe('xxx');
+    })
 
 
 });

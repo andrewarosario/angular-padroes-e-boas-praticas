@@ -1,7 +1,7 @@
 import { Todo } from '../models/todo.model';
 
 export const mockTodo: Todo = {
-    id: '111', title: 'test1', isCompleted: false
+    id: '000', title: 'test1', isCompleted: false
 }
 
 export const mockUncompletedTodos: Todo[] = [
