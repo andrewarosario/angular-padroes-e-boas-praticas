@@ -5,7 +5,8 @@ import { StorageService } from 'src/app/core/classes/storage.service';
 export class LocalStorageService extends StorageService {
 
   getData(key: string): any {
-    return localStorage.getItem(key);
+    const data = localStorage.getItem(key);
+    return data && JSON.parse(data);
   }
 
   setData(key: string, value: any): void {
