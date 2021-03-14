@@ -4,31 +4,41 @@ import { TodosApi } from './api/todos.api';
 import { TodosState } from './state/todos.state';
 import { Observable } from 'rxjs';
 import { uuid } from '../shared/helpers/uuid';
+import { SearchConfigService } from '../search-config/search-config.service';
+import { debounceTime, distinctUntilChanged, startWith, switchMap, tap } from 'rxjs/operators';
 
-@Injectable({
-  providedIn: 'root'
-})
+@Injectable()
 export class TodosFacade {
 
   constructor(
     private api: TodosApi,
-    private state: TodosState
+    private state: TodosState,
+    private searchConfigService: SearchConfigService<string>
   ) { }
 
   completedTodos$: Observable<Todo[]> = this.state.completedTodos$;
   uncompletedTodos$: Observable<Todo[]> = this.state.uncompletedTodos$;
 
-  async loadAll() {
-    this.state.todos = await this.api.getAll();
+  listenToSearchChanges(search$: Observable<string>): void {
+    search$.pipe(
+      startWith(this.getInitialSearch()),
+      distinctUntilChanged(),
+      debounceTime(300),
+      tap(search => this.searchConfigService.updateSearch(search)),
+      switchMap(search => this.api.getAll(search))
+    )
+    .subscribe(todos => this.state.todos = todos);
   }
 
-  async addTodo(title: string) {
+  getInitialSearch(): string {
+    return this.searchConfigService.getInitialValue();
+  }
+
+  async addTodo(title: string): Promise<void> {
 
     if (title && title.length) {
-
       const tmpId = uuid();
       const tmpTodo = { id: tmpId, title, isCompleted: false };
-
       this.state.addTodo(tmpTodo);
 
       try {
@@ -43,7 +53,6 @@ export class TodosFacade {
   }
 
   async removeTodo(id: string) {
-
     const todo = this.state.getById(id);
     this.state.removeTodo(id);
 

@@ -1,6 +1,10 @@
+<app-todo-search-form
+  [todoSearchForm]="searchForm">
+</app-todo-search-form>
+
 <app-todo-add-form
   [todoAddForm]="todoAddForm"
-  (onAddTodo)="onAddTodo($event)"
+  (addTodo)="addTodo($event)"
 >
 </app-todo-add-form>
 
