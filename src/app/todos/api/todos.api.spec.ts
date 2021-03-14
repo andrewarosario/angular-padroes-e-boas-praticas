@@ -19,7 +19,7 @@ describe('TodosApi', () => {
   beforeEach(() => {
       service = TestBed.get(TodosApi);
       httpTestingController = TestBed.get(HttpTestingController);
-  })
+  });
 
   afterEach(() => {
       httpTestingController.verify();
@@ -28,28 +28,29 @@ describe('TodosApi', () => {
 
   it('should be created', () => {
       expect(service).toBeTruthy();
-  })
+  });
 
   describe('#getAll', () => {
     it('returned Promise should match the right data', () => {
-        service.getAll()
+        const searchQuery = 'search';
+        service.getAll(searchQuery)
           .then(todos => {
-            expect(todos[0].title).toEqual(mockAllTodos[0].title)
-            expect(todos[1].title).toEqual(mockAllTodos[1].title)
+            expect(todos[0].title).toEqual(mockAllTodos[0].title);
+            expect(todos[1].title).toEqual(mockAllTodos[1].title);
           });
 
-        const req = httpTestingController.expectOne('https://5c6716e624e2140014f9ee66.mockapi.io/todo/todos');
+        const req = httpTestingController
+          .expectOne(`https://5c6716e624e2140014f9ee66.mockapi.io/todo/todos?search=${searchQuery}`);
         expect(req.request.method).toEqual('GET');
         req.flush(mockAllTodos);
-            
-    })
+    });
   });
 
   describe('#create', async () => {
       it('returned Promise should match the right data', () => {
         service.create(mockTodo)
             .then(todo => {
-                expect(todo.title).toEqual(mockTodo.title)
+                expect(todo.title).toEqual(mockTodo.title);
             });
 
         const req = httpTestingController.expectOne('https://5c6716e624e2140014f9ee66.mockapi.io/todo/todos');
