@@ -1,11 +1,10 @@
-import { TodosState } from "./todos.state";
+import { TodosState } from './todos.state';
 import { TestBed } from '@angular/core/testing';
 import { mockAllTodos, mockUncompletedTodos, mockCompletedTodos, mockTodo } from '../mocks/todos.mock';
-import { take } from 'rxjs/operators';
 
 describe('TodosState', () => {
     let service: TodosState;
-    
+
     beforeEach(() => {
         TestBed.configureTestingModule({
           providers: [TodosState],
@@ -24,21 +23,21 @@ describe('TodosState', () => {
     it('should return an Observable of all todos', () => {
         service.todos$.subscribe(todos => {
             expect(todos).toEqual(mockAllTodos);
-        })
+        });
     });
 
     it('should return an Observable of all uncompleted todos', done => {
         service.uncompletedTodos$.subscribe(todos => {
             expect(todos).toEqual(mockUncompletedTodos);
             done();
-        })
+        });
     });
 
     it('should return an Observable of all completed todos', done => {
         service.completedTodos$.subscribe(todos => {
             expect(todos).toEqual(mockCompletedTodos);
             done();
-        })
+        });
     });
 
     it('should add todo', () => {
@@ -75,10 +74,8 @@ describe('TodosState', () => {
 
     it('should update the id of a todo', () => {
         const todoInserted = service.addTodo(mockTodo);
-        todoInserted.id = 'xxx'
+        todoInserted.id = 'xxx';
         const todo = service.updateId(todoInserted, todoInserted.id);
         expect(todo.id).toBe('xxx');
-    })
-
-
+    });
 });
