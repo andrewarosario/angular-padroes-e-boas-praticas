@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
+import { Component, Input, Output, EventEmitter } from '@angular/core';
 import { FormControl } from '@angular/forms';
 
 @Component({
@@ -6,12 +6,9 @@ import { FormControl } from '@angular/forms';
   templateUrl: './todo-add-form.component.html',
   styleUrls: ['./todo-add-form.component.css']
 })
-export class TodoAddFormComponent implements OnInit {
+export class TodoAddFormComponent {
 
   @Input() todoAddForm: FormControl;
-  @Output() onAddTodo = new EventEmitter<string>();
-
-  ngOnInit() {
-  }
+  @Output() addTodo = new EventEmitter<string>();
 
 }

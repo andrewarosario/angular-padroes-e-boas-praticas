@@ -32,27 +32,25 @@ describe('TodoAddFormComponent', () => {
 
   it('button should be disabled when todoAddForm is invalid', () => {
     component.todoAddForm = new FormControl();
-    component.todoAddForm.setErrors({ incorrect: true })
+    component.todoAddForm.setErrors({ incorrect: true });
     fixture.detectChanges();
-    
+
     const buttonElement: HTMLElement = fixture.debugElement.query(By.css('button')).nativeElement;
-    
+
     let value: string = null;
-    component.onAddTodo.subscribe(response => value = response);
+    component.addTodo.subscribe(response => value = response);
     buttonElement.click();
     expect(value).toBeFalsy();
   });
 
 
-  it('should emit value on click onAddTodo', () => {
+  it('should emit value on click addTodo', () => {
     component.todoAddForm = new FormControl('text');
     fixture.detectChanges();
     const buttonElement: HTMLElement = fixture.debugElement.query(By.css('button')).nativeElement;
     let value: string = null;
-    component.onAddTodo.subscribe(response => value = response);
+    component.addTodo.subscribe(response => value = response);
     buttonElement.click();
     expect(value).toBe('text');
   });
-
-
 });

@@ -1,3 +1,4 @@
-<input [formControl]="todoAddForm" type="text" placeholder="Todo title...">
-
-<button [disabled]="todoAddForm.invalid" (click)="onAddTodo.emit(todoAddForm.value)">ADD</button>
+<div class="todo-add">
+  <input [formControl]="todoAddForm" type="text" placeholder="New Todo...">
+  <button [disabled]="todoAddForm.invalid" (click)="addTodo.emit(todoAddForm.value)">ADD</button>
+</div>
