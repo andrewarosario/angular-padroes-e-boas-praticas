@@ -63,16 +63,16 @@ export class TodosFacade {
     }
   }
 
-  async removeTodo(id: string) {
+  removeTodo(id: string) {
     const todo = this.state.getById(id);
     this.state.removeTodo(id);
 
-    try {
-      await this.api.remove(id);
-    } catch (e) {
-      console.error(e);
-      this.state.addTodo(todo);
-    }
+    this.api.remove(id).subscribe(
+      () => {},
+      (error) => {
+        console.error(error);
+        this.state.addTodo(todo);
+      });
   }
 
   toggleCompleted(id: string, isCompleted: boolean): void {

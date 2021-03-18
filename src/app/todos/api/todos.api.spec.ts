@@ -60,9 +60,9 @@ describe('TodosApi', () => {
   });
 
   describe('#remove', async () => {
-    it('returned Promise should match the right data', () => {
+    it('returned Observable should match the right data', () => {
       service.remove(mockTodo.id)
-          .then(todo => {
+          .subscribe(todo => {
             expect(todo).toEqual(mockTodo);
           });
 
