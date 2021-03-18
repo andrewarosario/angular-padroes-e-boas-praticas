@@ -1,5 +1,5 @@
 import { Inject, Injectable } from '@angular/core';
-import { StorageService } from 'src/app/core/classes/storage.service';
+import { Storage } from 'src/app/shared/storage/storage';
 import { SearchConfig, SEARCH_CONFIG } from 'src/app/core/tokens/search-config-token';
 import { ISearchConfig } from './search-config';
 
@@ -7,7 +7,7 @@ import { ISearchConfig } from './search-config';
 export class SearchConfigService<T> implements ISearchConfig<T> {
 
   constructor(
-    private storageService: StorageService,
+    private storageService: Storage,
     @Inject(SEARCH_CONFIG) private searchConfig: SearchConfig<T>
   ) { }
 

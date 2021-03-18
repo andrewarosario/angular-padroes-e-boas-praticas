@@ -1,12 +1,12 @@
 import { TestBed } from '@angular/core/testing';
-import { StorageService } from '../core/classes/storage.service';
+import { Storage } from '../shared/storage/storage';
 import { LocalStorageService } from '../shared/storage/local-storage/local-storage.service';
 import { SEARCH_CONFIG_TODO } from '../todos/models/search-config-todo.model';
 import { SearchConfigModule } from './search-config.module';
 import { SearchConfigService } from './search-config.service';
 
 let service: SearchConfigService<any>;
-let storageService: StorageService;
+let storageService: Storage;
 
 describe('SearchConfigService', () => {
   beforeEach(() => TestBed.configureTestingModule({
@@ -14,15 +14,15 @@ describe('SearchConfigService', () => {
       SearchConfigModule.forRoot(SEARCH_CONFIG_TODO)
     ],
     providers: [
-      StorageService,
+      Storage,
       LocalStorageService,
-      { provide: StorageService, useClass: LocalStorageService }
+      { provide: Storage, useClass: LocalStorageService }
     ]
   }));
 
   beforeEach(() => {
     service = TestBed.get(SearchConfigService);
-    storageService = TestBed.get(StorageService);
+    storageService = TestBed.get(Storage);
   });
 
   it('should be created', () => {

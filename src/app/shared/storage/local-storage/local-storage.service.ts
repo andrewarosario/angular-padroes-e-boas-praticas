@@ -1,8 +1,8 @@
 import { Injectable } from '@angular/core';
-import { StorageService } from 'src/app/core/classes/storage.service';
+import { Storage } from 'src/app/shared/storage/storage';
 
 @Injectable()
-export class LocalStorageService extends StorageService {
+export class LocalStorageService extends Storage {
 
   getData(key: string): any {
     const data = localStorage.getItem(key);

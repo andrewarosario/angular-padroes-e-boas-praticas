@@ -2,7 +2,7 @@ import { NgModule, Optional, SkipSelf } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { HttpClientModule } from '@angular/common/http';
 import { LocalStorageService } from '../shared/storage/local-storage/local-storage.service';
-import { StorageService } from './classes/storage.service';
+import { Storage } from '../shared/storage/storage';
 import { ErrorHandlerModule } from './errors/error-handler.module';
 
 @NgModule({
@@ -15,7 +15,7 @@ import { ErrorHandlerModule } from './errors/error-handler.module';
   providers: [
     LocalStorageService,
     {
-      provide: StorageService,
+      provide: Storage,
       useClass: LocalStorageService
     }
   ]
