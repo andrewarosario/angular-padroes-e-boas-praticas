@@ -3,12 +3,14 @@ import { CommonModule } from '@angular/common';
 import { HttpClientModule } from '@angular/common/http';
 import { LocalStorageService } from '../shared/storage/local-storage.service';
 import { StorageService } from './classes/storage.service';
+import { ErrorHandlerModule } from './errors/error-handler.module';
 
 @NgModule({
   declarations: [],
   imports: [
     CommonModule,
-    HttpClientModule
+    HttpClientModule,
+    ErrorHandlerModule,
   ],
   providers: [
     LocalStorageService,
