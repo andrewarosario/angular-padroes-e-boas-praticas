@@ -75,16 +75,18 @@ export class TodosFacade {
     }
   }
 
-  async setCompleted(id: string, isCompleted: boolean) {
+  setCompleted(id: string, isCompleted: boolean) {
 
     this.state.setCompleted(id, isCompleted);
 
-    try {
-      await this.api.setCompleted(id, isCompleted);
-    } catch (e) {
-      console.error(e);
-      this.state.setCompleted(id, !isCompleted);
-    }
+    this.api.setCompleted(id, isCompleted)
+      .subscribe(
+        () => {},
+        (error) => {
+          console.error(error);
+          this.state.setCompleted(id, !isCompleted);
+        }
+      );
   }
 
 }

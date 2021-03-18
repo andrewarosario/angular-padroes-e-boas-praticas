@@ -25,6 +25,6 @@ export class TodosApi {
   }
 
   setCompleted(id: string, isCompleted: boolean) {
-    return this.http.put<Todo>(`${this.apiBaseUrl}/todos/${id}`, {isCompleted}).toPromise();
+    return this.http.put<Todo>(`${this.apiBaseUrl}/todos/${id}`, {isCompleted});
   }
 }
