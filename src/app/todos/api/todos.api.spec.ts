@@ -31,10 +31,10 @@ describe('TodosApi', () => {
   });
 
   describe('#list', () => {
-    it('returned Promise should match the right data', () => {
+    it('returned Observable should match the right data', () => {
         const searchQuery = 'search';
         service.list(searchQuery)
-          .then(todos => {
+          .subscribe(todos => {
             expect(todos[0].title).toEqual(mockAllTodos[0].title);
             expect(todos[1].title).toEqual(mockAllTodos[1].title);
           });
@@ -47,16 +47,16 @@ describe('TodosApi', () => {
   });
 
   describe('#create', async () => {
-      it('returned Promise should match the right data', () => {
-        service.create(mockTodo)
-            .then(todo => {
-                expect(todo.title).toEqual(mockTodo.title);
-            });
+    it('returned Promise should match the right data', () => {
+      service.create(mockTodo)
+          .then(todo => {
+              expect(todo.title).toEqual(mockTodo.title);
+          });
 
-        const req = httpTestingController.expectOne('https://5c6716e624e2140014f9ee66.mockapi.io/todo/todos');
-        expect(req.request.method).toEqual('POST');
-        req.flush(mockTodo);
-      });
+      const req = httpTestingController.expectOne('https://5c6716e624e2140014f9ee66.mockapi.io/todo/todos');
+      expect(req.request.method).toEqual('POST');
+      req.flush(mockTodo);
+    });
   });
 
   describe('#remove', async () => {
@@ -84,6 +84,5 @@ describe('TodosApi', () => {
       expect(req.request.method).toEqual('PUT');
       req.flush({ ...mockTodo, isCompleted: true});
     });
-});
-
+  });
 });

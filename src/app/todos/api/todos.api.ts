@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Todo } from '../models/todo.model';
+import { Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -11,8 +12,8 @@ export class TodosApi {
 
   constructor(private http: HttpClient) { }
 
-  list(search: string) {
-    return this.http.get<Todo[]>(`${this.apiBaseUrl}/todos?search=${search}`).toPromise();
+  list(search: string): Observable<Todo[]> {
+    return this.http.get<Todo[]>(`${this.apiBaseUrl}/todos?search=${search}`);
   }
 
   create(todo: Todo) {
