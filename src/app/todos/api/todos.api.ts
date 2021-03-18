@@ -24,7 +24,7 @@ export class TodosApi {
     return this.http.delete(`${this.apiBaseUrl}/todos/${id}`).toPromise();
   }
 
-  setCompleted(id: string, isCompleted: boolean) {
+  toggleCompleted(id: string, isCompleted: boolean) {
     return this.http.put<Todo>(`${this.apiBaseUrl}/todos/${id}`, {isCompleted});
   }
 }

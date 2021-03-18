@@ -72,9 +72,9 @@ describe('TodosApi', () => {
     });
   });
 
-  describe('#setCompleted', async () => {
+  describe('#toggleCompleted', async () => {
     it('returned Observable should match the right data', () => {
-      service.setCompleted(mockTodo.id, true)
+      service.toggleCompleted(mockTodo.id, true)
           .subscribe(todo => {
               expect(todo.id).toEqual(mockTodo.id);
               expect(todo.isCompleted).toEqual(true);

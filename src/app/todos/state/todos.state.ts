@@ -48,7 +48,7 @@ export class TodosState {
     this.todos = this.todos.filter(t => t.id !== id);
   }
 
-  public setCompleted(id: string, isCompleted: boolean): Todo {
+  public toggleCompleted(id: string, isCompleted: boolean): Todo {
     const todo = this.getById(id);
 
     if (todo) {

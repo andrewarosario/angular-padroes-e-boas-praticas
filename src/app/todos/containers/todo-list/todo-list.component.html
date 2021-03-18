@@ -16,7 +16,7 @@
     class="uncompleted-todos"
     *ngFor="let todo of facade.uncompletedTodos$ | async; trackBy: todosTrackFn"
     [todo]="todo"
-    (markComplete)="facade.setCompleted(todo.id, $event)"
+    (markComplete)="facade.toggleCompleted(todo.id, $event)"
     (remove)="facade.removeTodo($event)"
   ></app-todo>
 </div>
@@ -31,7 +31,7 @@
     class="completed-todos"
     *ngFor="let todo of facade.completedTodos$ | async; trackBy: todosTrackFn"
     [todo]="todo"
-    (markComplete)="facade.setCompleted(todo.id, $event)"
+    (markComplete)="facade.toggleCompleted(todo.id, $event)"
     (remove)="facade.removeTodo($event)"
   ></app-todo>
 </div>

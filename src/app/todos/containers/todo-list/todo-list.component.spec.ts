@@ -104,12 +104,12 @@ describe('TodoListComponent', () => {
         expect(completedTodos.length).toBe(mockCompletedTodos.length);
       });
 
-      it('should call "facade.setCompleted" method on toggle todo', () => {
+      it('should call "facade.toggleCompleted" method on toggle todo', () => {
         fixture.detectChanges();
-        spyOn(facade, 'setCompleted');
+        spyOn(facade, 'toggleCompleted');
         const todoComponent = fixture.debugElement.query(By.directive(TodoComponent)).componentInstance;
         todoComponent.markComplete.emit(true);
-        expect(facade.setCompleted).toHaveBeenCalledWith(todoComponent.todo.id, true);
+        expect(facade.toggleCompleted).toHaveBeenCalledWith(todoComponent.todo.id, true);
       });
 
       it('should call "facade.removeTodo" method on remove todo', () => {

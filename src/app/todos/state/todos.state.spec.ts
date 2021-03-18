@@ -62,13 +62,13 @@ describe('TodosState', () => {
 
     it('should set todo as completed', () => {
         const todoInserted = service.addTodo(mockTodo);
-        const todo = service.setCompleted(todoInserted.id, true);
+        const todo = service.toggleCompleted(todoInserted.id, true);
         expect(todo.isCompleted).toBe(true);
     });
 
     it('should set todo as uncompleted', () => {
         const todoInserted = service.addTodo(mockTodo);
-        const todo = service.setCompleted(todoInserted.id, false);
+        const todo = service.toggleCompleted(todoInserted.id, false);
         expect(todo.isCompleted).toBe(false);
     });
 

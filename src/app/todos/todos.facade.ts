@@ -75,16 +75,16 @@ export class TodosFacade {
     }
   }
 
-  setCompleted(id: string, isCompleted: boolean) {
+  toggleCompleted(id: string, isCompleted: boolean): void {
 
-    this.state.setCompleted(id, isCompleted);
+    this.state.toggleCompleted(id, isCompleted);
 
-    this.api.setCompleted(id, isCompleted)
+    this.api.toggleCompleted(id, isCompleted)
       .subscribe(
         () => {},
         (error) => {
           console.error(error);
-          this.state.setCompleted(id, !isCompleted);
+          this.state.toggleCompleted(id, !isCompleted);
         }
       );
   }
