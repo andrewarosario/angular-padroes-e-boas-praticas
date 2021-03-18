@@ -11,7 +11,7 @@ export class TodosApi {
 
   constructor(private http: HttpClient) { }
 
-  getAll(search: string) {
+  list(search: string) {
     return this.http.get<Todo[]>(`${this.apiBaseUrl}/todos?search=${search}`).toPromise();
   }
 

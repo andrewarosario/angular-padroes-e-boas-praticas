@@ -30,10 +30,10 @@ describe('TodosApi', () => {
       expect(service).toBeTruthy();
   });
 
-  describe('#getAll', () => {
+  describe('#list', () => {
     it('returned Promise should match the right data', () => {
         const searchQuery = 'search';
-        service.getAll(searchQuery)
+        service.list(searchQuery)
           .then(todos => {
             expect(todos[0].title).toEqual(mockAllTodos[0].title);
             expect(todos[1].title).toEqual(mockAllTodos[1].title);

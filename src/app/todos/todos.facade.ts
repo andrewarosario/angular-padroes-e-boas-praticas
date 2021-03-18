@@ -36,7 +36,7 @@ export class TodosFacade {
       distinctUntilChanged(),
       debounceTime(300),
       tap(search => this.searchConfigService.updateSearch(search)),
-      switchMap(search => this.api.getAll(search))
+      switchMap(search => this.api.list(search))
     )
     .subscribe(todos => this.state.todos = todos);
   }
