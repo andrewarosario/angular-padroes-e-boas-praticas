@@ -45,25 +45,22 @@ export class TodosFacade {
     return this.searchConfigService.getInitialValue();
   }
 
-  async addTodo(title: string): Promise<void> {
+  addTodo(title: string): void {
 
     if (title && title.length) {
       const tmpId = uuid();
       const tmpTodo = { id: tmpId, title, isCompleted: false };
       this.state.addTodo(tmpTodo);
 
-      try {
-        const todo = await this.api.create({ title, isCompleted: false });
-        this.state.updateId(todo, tmpId);
-
-      } catch (e) {
-        console.error(e);
-        this.state.removeTodo(tmpId);
-      }
+      this.api.create({ title, isCompleted: false })
+        .subscribe(
+          todo => this.state.updateId(todo, tmpId),
+          error => this.state.removeTodo(tmpId)
+        );
     }
   }
 
-  removeTodo(id: string) {
+  removeTodo(id: string): void {
     const todo = this.state.getById(id);
     this.state.removeTodo(id);
 
@@ -82,10 +79,7 @@ export class TodosFacade {
     this.api.toggleCompleted(id, isCompleted)
       .subscribe(
         () => {},
-        (error) => {
-          console.error(error);
-          this.state.toggleCompleted(id, !isCompleted);
-        }
+        (error) => this.state.toggleCompleted(id, !isCompleted)
       );
   }
 

@@ -1,4 +1,4 @@
-import { TestBed, inject } from '@angular/core/testing';
+import { TestBed } from '@angular/core/testing';
 
 import { TodosApi } from './todos.api';
 import { HttpClientTestingModule, HttpTestingController } from '@angular/common/http/testing';
@@ -47,9 +47,9 @@ describe('TodosApi', () => {
   });
 
   describe('#create', async () => {
-    it('returned Promise should match the right data', () => {
+    it('returned Observable should match the right data', () => {
       service.create(mockTodo)
-          .then(todo => {
+          .subscribe(todo => {
               expect(todo.title).toEqual(mockTodo.title);
           });
 

@@ -16,15 +16,15 @@ export class TodosApi {
     return this.http.get<Todo[]>(`${this.apiBaseUrl}/todos?search=${search}`);
   }
 
-  create(todo: Todo) {
-    return this.http.post<Todo>(`${this.apiBaseUrl}/todos`, todo).toPromise();
+  create(todo: Todo): Observable<Todo> {
+    return this.http.post<Todo>(`${this.apiBaseUrl}/todos`, todo);
   }
 
   remove(id: string): Observable<Todo> {
     return this.http.delete<Todo>(`${this.apiBaseUrl}/todos/${id}`);
   }
 
-  toggleCompleted(id: string, isCompleted: boolean) {
+  toggleCompleted(id: string, isCompleted: boolean): Observable<Todo> {
     return this.http.put<Todo>(`${this.apiBaseUrl}/todos/${id}`, {isCompleted});
   }
 }
