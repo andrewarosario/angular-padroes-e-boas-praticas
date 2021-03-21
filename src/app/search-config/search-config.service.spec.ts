@@ -21,8 +21,8 @@ describe('SearchConfigService', () => {
   }));
 
   beforeEach(() => {
-    service = TestBed.get(SearchConfigService);
-    storageService = TestBed.get(Storage);
+    service = TestBed.inject(SearchConfigService);
+    storageService = TestBed.inject(Storage);
   });
 
   it('should be created', () => {

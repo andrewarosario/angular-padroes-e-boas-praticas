@@ -40,7 +40,7 @@ describe('TodoListComponent', () => {
   beforeEach(() => {
     fixture = TestBed.createComponent(TodoListComponent);
     component = fixture.componentInstance;
-    facade = TestBed.get(TodosFacade);
+    facade = TestBed.inject(TodosFacade);
   });
 
   it('should create', () => {

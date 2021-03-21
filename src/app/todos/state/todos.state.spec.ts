@@ -12,7 +12,7 @@ describe('TodosState', () => {
     });
 
     beforeEach(() => {
-        service = TestBed.get(TodosState);
+        service = TestBed.inject(TodosState);
         service.todos = mockAllTodos;
     });
 

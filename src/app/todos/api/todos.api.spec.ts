@@ -17,8 +17,8 @@ describe('TodosApi', () => {
   });
 
   beforeEach(() => {
-      service = TestBed.get(TodosApi);
-      httpTestingController = TestBed.get(HttpTestingController);
+      service = TestBed.inject(TodosApi);
+      httpTestingController = TestBed.inject(HttpTestingController);
   });
 
   afterEach(() => {

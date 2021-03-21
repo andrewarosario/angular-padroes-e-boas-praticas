@@ -8,7 +8,7 @@ describe('LocalStorageService', () => {
   }));
 
   beforeEach(() => {
-    service = TestBed.get(LocalStorageService);
+    service = TestBed.inject(LocalStorageService);
   });
 
   it('should be created', () => {
