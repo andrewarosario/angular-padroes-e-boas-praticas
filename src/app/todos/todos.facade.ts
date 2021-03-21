@@ -66,10 +66,8 @@ export class TodosFacade {
 
     this.api.remove(id).subscribe(
       () => {},
-      (error) => {
-        console.error(error);
-        this.state.addTodo(todo);
-      });
+      (error) => this.state.addTodo(todo)
+    );
   }
 
   toggleCompleted(id: string, isCompleted: boolean): void {
