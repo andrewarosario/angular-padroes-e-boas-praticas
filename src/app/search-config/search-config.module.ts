@@ -4,7 +4,7 @@ import { SearchConfigService } from './search-config.service';
 
 @NgModule({})
 export class SearchConfigModule {
-  static forRoot<T>(searchConfig: SearchConfig<T>): ModuleWithProviders {
+  static forRoot<T>(searchConfig: SearchConfig<T>): ModuleWithProviders<SearchConfigModule> {
     return {
       ngModule: SearchConfigModule,
       providers: [

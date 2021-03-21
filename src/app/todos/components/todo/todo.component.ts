@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, Output, EventEmitter, ChangeDetectionStrategy } from '@angular/core';
+import { Component, Input, Output, EventEmitter, ChangeDetectionStrategy } from '@angular/core';
 import { Todo } from '../../models/todo.model';
 
 @Component({
@@ -7,15 +7,10 @@ import { Todo } from '../../models/todo.model';
   styleUrls: ['./todo.component.css'],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class TodoComponent implements OnInit {
+export class TodoComponent {
 
   @Input() todo: Todo;
   @Output() markComplete = new EventEmitter<boolean>();
-  @Output() remove = new EventEmitter<number>();
-
-  constructor() { }
-
-  ngOnInit() {
-  }
+  @Output() remove = new EventEmitter<string>();
 
 }
