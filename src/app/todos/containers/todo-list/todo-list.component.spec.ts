@@ -9,6 +9,7 @@ import { TodosFacade } from '../../todos.facade';
 import { todosFacadeStub } from '../../mocks/todos-facade.mock';
 import { mockUncompletedTodos, mockCompletedTodos } from '../../mocks/todos.mock';
 import { TodoSearchFormComponent } from '../../components/todo-search-form/todo-search-form.component';
+import { formChangesUntilDestroyed } from 'src/app/shared/helpers/form-changes-until-destroyed/form-changes-until-destroyed';
 
 describe('TodoListComponent', () => {
   let component: TodoListComponent;
@@ -57,6 +58,13 @@ describe('TodoListComponent', () => {
     expect(elements[1].nativeElement.innerText.trim()).toEqual('Completed todos:');
   });
 
+  it('should call facade.listenToSearchChanges with correct value', () => {
+    const listenToSearchChangesSpy = spyOn(facade, 'listenToSearchChanges');
+    const search$ = formChangesUntilDestroyed(component, component.searchForm);
+    component.ngOnInit();
+    expect(listenToSearchChangesSpy).toHaveBeenCalledWith(search$);
+  });
+
   describe('AddTodo Form', () => {
 
     it('form should be invalid', () => {
@@ -90,11 +98,6 @@ describe('TodoListComponent', () => {
   });
 
   describe('Todo List', () => {
-      it('should call "facade.listenToSearchChanges" on init', () => {
-        spyOn(facade, 'listenToSearchChanges');
-        component.ngOnInit();
-        expect(facade.listenToSearchChanges).toHaveBeenCalled();
-      });
 
       it('should show todos list', async () => {
         fixture.detectChanges();
