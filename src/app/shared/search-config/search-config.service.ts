@@ -1,10 +1,9 @@
 import { Inject, Injectable } from '@angular/core';
 import { Storage } from 'src/app/shared/storage/storage';
 import { SearchConfig, SEARCH_CONFIG } from 'src/app/shared/search-config/search-config-token';
-import { ISearchConfig } from './search-config';
 
 @Injectable()
-export class SearchConfigService<T> implements ISearchConfig<T> {
+export class SearchConfigService<T> {
 
   constructor(
     private storageService: Storage,
