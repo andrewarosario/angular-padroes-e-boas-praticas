@@ -19,6 +19,8 @@
     "@angular/platform-browser": "~10.2.4",
     "@angular/platform-browser-dynamic": "~10.2.4",
     "@angular/router": "~10.2.4",
+    "@ngneat/hot-toast": "^2.0.1",
+    "@ngneat/overview": "^1.0.0",
     "@ngneat/until-destroy": "^8.0.4",
     "rxjs": "~6.6.6",
     "tslib": "^2.0.0",

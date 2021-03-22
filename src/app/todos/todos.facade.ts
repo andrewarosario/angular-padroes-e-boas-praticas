@@ -7,6 +7,7 @@ import { uuid } from '../shared/helpers/uuid';
 import { SearchConfigService } from '../search-config/search-config.service';
 import { debounceTime, distinctUntilChanged, startWith, switchMap, tap } from 'rxjs/operators';
 import { SEARCH_TODOS_EXAMPLE_FACTORY } from './models/search-config-todo.model';
+import { Notification } from '../shared/notification/notification';
 
 @Injectable()
 export class TodosFacade {
@@ -14,6 +15,7 @@ export class TodosFacade {
   constructor(
     private api: TodosApi,
     private state: TodosState,
+    private notification: Notification,
     private searchConfigService: SearchConfigService<string>,
     @Inject(SEARCH_TODOS_EXAMPLE_FACTORY) private searchConfigExampleFactory: SearchConfigService<string>
   ) {
@@ -54,7 +56,10 @@ export class TodosFacade {
 
       this.api.create({ title, isCompleted: false })
         .subscribe(
-          todo => this.state.updateId(todo, tmpId),
+          todo => {
+            this.state.updateId(todo, tmpId);
+            this.notification.success(title + ' Inserted!');
+          },
           error => this.state.removeTodo(tmpId)
         );
     }
@@ -65,7 +70,7 @@ export class TodosFacade {
     this.state.removeTodo(id);
 
     this.api.remove(id).subscribe(
-      () => {},
+      () => this.notification.success('Todo removed!'),
       (error) => this.state.addTodo(todo)
     );
   }
@@ -76,7 +81,7 @@ export class TodosFacade {
 
     this.api.toggleCompleted(id, isCompleted)
       .subscribe(
-        () => {},
+        () => this.notification.success(`Todo ${isCompleted ? 'checked' : 'unchecked'}!`),
         (error) => this.state.toggleCompleted(id, !isCompleted)
       );
   }
