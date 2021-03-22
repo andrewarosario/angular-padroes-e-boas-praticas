@@ -6,8 +6,8 @@ import { Observable } from 'rxjs';
 import { uuid } from '../shared/helpers/uuid';
 import { SearchConfigService } from '../shared/search-config/search-config.service';
 import { debounceTime, distinctUntilChanged, startWith, switchMap, tap } from 'rxjs/operators';
-import { SEARCH_TODOS_EXAMPLE_FACTORY } from './models/search-config-todo.model';
 import { Notification } from '../shared/notification/notification';
+import { SEARCH_TODOS_EXAMPLE_FACTORY } from './factories/search-config-todos-factory';
 
 @Injectable()
 export class TodosFacade {
