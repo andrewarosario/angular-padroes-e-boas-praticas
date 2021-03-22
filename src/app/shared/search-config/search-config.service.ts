@@ -1,6 +1,6 @@
 import { Inject, Injectable } from '@angular/core';
 import { Storage } from 'src/app/shared/storage/storage';
-import { SearchConfig, SEARCH_CONFIG } from 'src/app/core/tokens/search-config-token';
+import { SearchConfig, SEARCH_CONFIG } from 'src/app/shared/search-config/search-config-token';
 import { ISearchConfig } from './search-config';
 
 @Injectable()

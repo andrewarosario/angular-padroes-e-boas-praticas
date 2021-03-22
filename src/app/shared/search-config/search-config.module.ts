@@ -1,5 +1,5 @@
 import { ModuleWithProviders, NgModule } from '@angular/core';
-import { SearchConfig, SEARCH_CONFIG } from '../core/tokens/search-config-token';
+import { SearchConfig, SEARCH_CONFIG } from './search-config-token';
 import { SearchConfigService } from './search-config.service';
 
 @NgModule({})
