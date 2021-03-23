@@ -2,29 +2,28 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Todo } from '../models/todo.model';
 import { Observable } from 'rxjs';
+import { environment } from 'src/environments/environment';
 
 @Injectable({
   providedIn: 'root'
 })
 export class TodosApi {
 
-  private readonly apiBaseUrl = 'https://5c6716e624e2140014f9ee66.mockapi.io/todo';
-
   constructor(private http: HttpClient) { }
 
   list(search: string): Observable<Todo[]> {
-    return this.http.get<Todo[]>(`${this.apiBaseUrl}/todos?search=${search}`);
+    return this.http.get<Todo[]>(`${environment.apiBaseUrl}/todos?search=${search}`);
   }
 
   create(todo: Todo): Observable<Todo> {
-    return this.http.post<Todo>(`${this.apiBaseUrl}/todos`, todo);
+    return this.http.post<Todo>(`${environment.apiBaseUrl}/todos`, todo);
   }
 
   remove(id: string): Observable<Todo> {
-    return this.http.delete<Todo>(`${this.apiBaseUrl}/todos/${id}`);
+    return this.http.delete<Todo>(`${environment.apiBaseUrl}/todos/${id}`);
   }
 
   toggleCompleted(id: string, isCompleted: boolean): Observable<Todo> {
-    return this.http.put<Todo>(`${this.apiBaseUrl}/todos/${id}`, {isCompleted});
+    return this.http.put<Todo>(`${environment.apiBaseUrl}/todos/${id}`, {isCompleted});
   }
 }
