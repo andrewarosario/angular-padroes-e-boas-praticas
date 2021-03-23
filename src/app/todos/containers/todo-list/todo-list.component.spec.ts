@@ -10,11 +10,22 @@ import { todosFacadeStub } from '../../mocks/todos-facade.mock';
 import { mockUncompletedTodos, mockCompletedTodos } from '../../mocks/todos.mock';
 import { TodoSearchFormComponent } from '../../components/todo-search-form/todo-search-form.component';
 import { formChangesUntilDestroyed } from 'src/app/shared/helpers/form-changes-until-destroyed/form-changes-until-destroyed';
+import { CardComponent } from 'src/app/shared/components/card/card.component';
+import { CardHeaderComponent } from 'src/app/shared/components/card-header/card-header.component';
+import { DebugElement } from '@angular/core';
 
 describe('TodoListComponent', () => {
   let component: TodoListComponent;
   let fixture: ComponentFixture<TodoListComponent>;
   let facade: TodosFacade;
+
+  function getCardComponents(): DebugElement[] {
+    return fixture.debugElement.queryAll(By.directive(CardComponent));
+  }
+
+  function getCardHeaderComponents(): DebugElement[] {
+    return fixture.debugElement.queryAll(By.directive(CardHeaderComponent));
+  }
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
@@ -22,7 +33,9 @@ describe('TodoListComponent', () => {
         TodoListComponent,
         TodoComponent,
         TodoSearchFormComponent,
-        TodoAddFormComponent
+        TodoAddFormComponent,
+        CardComponent,
+        CardHeaderComponent
       ],
       imports: [
           BrowserModule,
@@ -48,14 +61,20 @@ describe('TodoListComponent', () => {
     expect(component).toBeTruthy();
   });
 
-  it('should contain a "p" title tag with uncompleted todos', () => {
-    const elements = fixture.debugElement.queryAll(By.css('p'));
-    expect(elements[0].nativeElement.innerText.trim()).toEqual('Uncompleted todos:');
+  it('should contain a card with uncompleted todos', () => {
+    const cardComponents = getCardComponents();
+    const cardHeaderComponents = getCardHeaderComponents();
+    expect(cardComponents[0].componentInstance).toBeTruthy();
+    expect(cardHeaderComponents[0].componentInstance).toBeTruthy();
+    expect(cardHeaderComponents[0].componentInstance.title).toBe('Uncompleted todos');
   });
 
-  it('should contain a "p" title tag with completed todos', () => {
-    const elements = fixture.debugElement.queryAll(By.css('p'));
-    expect(elements[1].nativeElement.innerText.trim()).toEqual('Completed todos:');
+  it('should contain a card with completed todos', () => {
+    const cardComponents = getCardComponents();
+    const cardHeaderComponents = getCardHeaderComponents();
+    expect(cardComponents[1].componentInstance).toBeTruthy();
+    expect(cardHeaderComponents[1].componentInstance).toBeTruthy();
+    expect(cardHeaderComponents[1].componentInstance.title).toBe('Completed todos');
   });
 
   it('should call facade.listenToSearchChanges with correct value', () => {

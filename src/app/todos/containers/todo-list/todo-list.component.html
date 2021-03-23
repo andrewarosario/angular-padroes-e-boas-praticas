@@ -8,10 +8,8 @@
 >
 </app-todo-add-form>
 
-<div class="all-todos">
-
-  <p>Uncompleted todos:</p>
-
+<app-card>
+  <app-card-header title="Uncompleted todos"></app-card-header>
   <app-todo
     class="uncompleted-todos"
     *ngFor="let todo of facade.uncompletedTodos$ | async; trackBy: todosTrackFn"
@@ -19,14 +17,12 @@
     (markComplete)="facade.toggleCompleted(todo.id, $event)"
     (remove)="facade.removeTodo($event)"
   ></app-todo>
-</div>
+</app-card>
 
 <hr/>
 
-<div class="all-todos">
-
-  <p>Completed todos:</p>
-
+<app-card>
+  <app-card-header title="Completed todos"></app-card-header>
   <app-todo
     class="completed-todos"
     *ngFor="let todo of facade.completedTodos$ | async; trackBy: todosTrackFn"
@@ -34,5 +30,5 @@
     (markComplete)="facade.toggleCompleted(todo.id, $event)"
     (remove)="facade.removeTodo($event)"
   ></app-todo>
-</div>
+</app-card>
 
