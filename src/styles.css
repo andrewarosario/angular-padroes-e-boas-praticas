@@ -1,1 +1,19 @@
 /* You can add global styles to this file, and also import other style files */
+html , body { width: 100%; height: 100%; margin: 0; padding: 0; font-family: 'Roboto', sans-serif; font-size: 14px; background-color: #eeeeee; color: #949494; }
+* { box-sizing: border-box; }
+h1 { font-size: 2.5em; font-weight: 400; }
+article { padding: 4em 3em; overflow: hidden; }
+p.arrows { text-align: right; margin: 0 0 1em 0; transition: all 0.5s ease; }
+p.arrows .btn { margin: 0.2em; }
+body.small p.arrows { margin-right: -0.8em; }
+body.large p.arrows { margin-right: 0.5em; }
+body.xl p.arrows { margin-right: 3.1em; margin-top: 2.4em; }
+label { display: block; line-height: 2em; }
+label input { width: 1.3em; height: 1.3em; margin: 0 0.5em 0 0; vertical-align: middle; }
+fieldset { border: 0; margin: 0 0 2em 0; padding: 1em; background-color: #f7f7f7; box-shadow: 0 0 5px rgba(0,0,0,0.2); overflow: hidden; border-radius: 0.3em; }
+fieldset > h3 { font-weight: 500; font-size: 1.2em; background-color: #FFF; margin: -0.824em -0.824em 0.824em -0.824em; padding: 1em; box-shadow: 0 0 3px rgba(0,0,0,0.1); border-radius: 0.3em 0.3em 0 0; }
+.row { margin: 0 -1em; }
+.col50 { float: left; width: 50%; padding: 0 1em; }
+@media screen and (max-width : 600px) {
+  .col50 { float: none; width: auto; }
+}

@@ -1,0 +1,11 @@
+header {
+  background-color: #cc5350;
+  padding: 1em 1em 1em 1em;
+  color: #FFF;
+  box-shadow: 0 0 10px rgba(0,0,0,0.4);
+  position: relative;
+}
+
+header > h1 {
+  margin: 0;
+}

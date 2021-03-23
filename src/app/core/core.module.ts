@@ -4,9 +4,15 @@ import { HttpClientModule } from '@angular/common/http';
 import { ErrorHandlerModule } from './errors/error-handler.module';
 import { NotificationModule } from '../shared/notification/notification.module';
 import { StorageModule } from '../shared/storage/storage.module';
+import { HeaderComponent } from './components/header/header.component';
 
 @NgModule({
-  declarations: [],
+  declarations: [
+    HeaderComponent
+  ],
+  exports: [
+    HeaderComponent
+  ],
   imports: [
     CommonModule,
     HttpClientModule,
