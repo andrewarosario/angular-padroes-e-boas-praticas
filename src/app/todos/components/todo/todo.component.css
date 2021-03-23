@@ -1,8 +1,15 @@
-.todo-container {
-  border: 1px black solid;
-  padding: 3px;
-  width: 100%;
+label {
+  display: block;
+  line-height: 2em;
 }
-.completed {
-  text-decoration: line-through;
+
+input {
+  width: 1.3em;
+  height: 1.3em;
+  margin: 0 0.5em 0 0;
+  vertical-align: middle;
+}
+
+.todo-title {
+  margin-right: 5px;
 }

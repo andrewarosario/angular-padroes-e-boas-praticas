@@ -1,4 +1,4 @@
-<div class="todo-container">
+<label class="todo-container">
   <input
     type="checkbox"
     [checked]="todo.isCompleted"
@@ -12,4 +12,4 @@
   </span>
 
   <button (click)=remove.emit(todo.id)>X</button>
-</div>
+</label>
