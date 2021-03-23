@@ -1,5 +1,5 @@
 import { Inject, Injectable } from '@angular/core';
-import { Todo } from './models/todo.model';
+import { createTempTodo, isTodoTitleValid, Todo } from './models/todo.model';
 import { TodosApi } from './api/todos.api';
 import { TodosState } from './state/todos.state';
 import { Observable } from 'rxjs';
@@ -49,18 +49,17 @@ export class TodosFacade {
 
   addTodo(title: string): void {
 
-    if (title && title.length) {
-      const tmpId = uuid();
-      const tmpTodo = { id: tmpId, title, isCompleted: false };
-      this.state.addTodo(tmpTodo);
+    if (isTodoTitleValid(title)) {
+      const tempTodo = createTempTodo(title);
+      this.state.addTodo(tempTodo);
 
-      this.api.create({ title, isCompleted: false })
+      this.api.create({ title, isCompleted: tempTodo.isCompleted })
         .subscribe(
           todo => {
-            this.state.updateId(todo, tmpId);
+            this.state.updateId(todo, tempTodo.id);
             this.notification.success(title + ' Inserted!');
           },
-          error => this.state.removeTodo(tmpId)
+          error => this.state.removeTodo(tempTodo.id)
         );
     }
   }

@@ -3,6 +3,7 @@ import { TestBed } from '@angular/core/testing';
 import { TodosApi } from './todos.api';
 import { HttpClientTestingModule, HttpTestingController } from '@angular/common/http/testing';
 import { mockTodo, mockAllTodos } from '../mocks/todos.mock';
+import { environment } from 'src/environments/environment';
 
 describe('TodosApi', () => {
 
@@ -40,7 +41,7 @@ describe('TodosApi', () => {
           });
 
         const req = httpTestingController
-          .expectOne(`https://5c6716e624e2140014f9ee66.mockapi.io/todo/todos?search=${searchQuery}`);
+          .expectOne(`${environment.apiBaseUrl}/todos?search=${searchQuery}`);
         expect(req.request.method).toEqual('GET');
         req.flush(mockAllTodos);
     });
@@ -53,7 +54,7 @@ describe('TodosApi', () => {
               expect(todo.title).toEqual(mockTodo.title);
           });
 
-      const req = httpTestingController.expectOne('https://5c6716e624e2140014f9ee66.mockapi.io/todo/todos');
+      const req = httpTestingController.expectOne(`${environment.apiBaseUrl}/todos`);
       expect(req.request.method).toEqual('POST');
       req.flush(mockTodo);
     });
@@ -66,7 +67,7 @@ describe('TodosApi', () => {
             expect(todo).toEqual(mockTodo);
           });
 
-      const req = httpTestingController.expectOne(`https://5c6716e624e2140014f9ee66.mockapi.io/todo/todos/${mockTodo.id}`);
+      const req = httpTestingController.expectOne(`${environment.apiBaseUrl}/todos/${mockTodo.id}`);
       expect(req.request.method).toEqual('DELETE');
       req.flush(mockTodo);
     });
@@ -80,7 +81,7 @@ describe('TodosApi', () => {
               expect(todo.isCompleted).toEqual(true);
           });
 
-      const req = httpTestingController.expectOne(`https://5c6716e624e2140014f9ee66.mockapi.io/todo/todos/${mockTodo.id}`);
+      const req = httpTestingController.expectOne(`${environment.apiBaseUrl}/todos/${mockTodo.id}`);
       expect(req.request.method).toEqual('PUT');
       req.flush({ ...mockTodo, isCompleted: true});
     });

@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Todo } from '../models/todo.model';
+import { Todo, TodoInsert } from '../models/todo.model';
 import { Observable } from 'rxjs';
 import { environment } from 'src/environments/environment';
 
@@ -15,7 +15,7 @@ export class TodosApi {
     return this.http.get<Todo[]>(`${environment.apiBaseUrl}/todos?search=${search}`);
   }
 
-  create(todo: Todo): Observable<Todo> {
+  create(todo: TodoInsert): Observable<Todo> {
     return this.http.post<Todo>(`${environment.apiBaseUrl}/todos`, todo);
   }
 
