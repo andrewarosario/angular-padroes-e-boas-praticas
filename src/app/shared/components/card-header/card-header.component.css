@@ -1,0 +1,9 @@
+h3 {
+  font-weight: 500;
+  font-size: 1.2em;
+  background-color: #FFF;
+  margin: -0.824em -0.824em 0.824em -0.824em;
+  padding: 1em;
+  box-shadow: 0 0 3px rgb(0 0 0 / 10%);
+  border-radius: 0.3em 0.3em 0 0;
+}
