@@ -1,4 +1,4 @@
 export const environment = {
   production: true,
-  apiBaseUrl: 'https://5c6716e624e2140014f9ee66.mockapi.io/todo'
+  apiBaseUrl: 'https://605a06e2b11aba001745d60c.mockapi.io/api'
 };
