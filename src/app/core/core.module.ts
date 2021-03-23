@@ -1,10 +1,9 @@
 import { NgModule, Optional, SkipSelf } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { HttpClientModule } from '@angular/common/http';
-import { LocalStorageService } from '../shared/storage/local-storage/local-storage.service';
-import { Storage } from '../shared/storage/storage';
 import { ErrorHandlerModule } from './errors/error-handler.module';
 import { NotificationModule } from '../shared/notification/notification.module';
+import { StorageModule } from '../shared/storage/storage.module';
 
 @NgModule({
   declarations: [],
@@ -12,14 +11,8 @@ import { NotificationModule } from '../shared/notification/notification.module';
     CommonModule,
     HttpClientModule,
     ErrorHandlerModule,
+    StorageModule,
     NotificationModule
-  ],
-  providers: [
-    LocalStorageService,
-    {
-      provide: Storage,
-      useClass: LocalStorageService
-    }
   ]
 })
 export class CoreModule {
