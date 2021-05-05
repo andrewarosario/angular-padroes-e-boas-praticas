@@ -15,7 +15,7 @@ import { TodosFacade } from '../../todos.facade';
 export class TodoListComponent implements OnInit {
 
   public todoAddForm = new FormControl('', Validators.required);
-  public searchForm = new FormControl(this.facade.getInitialSearch());
+  public searchForm = new FormControl();
 
   // optimization, rerenders only todos that change instead of the entire list of todos
   todosTrackFn = (i, todo: Todo) => todo.id;

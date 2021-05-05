@@ -1,8 +1,8 @@
 import { TestBed } from '@angular/core/testing';
-import { Storage } from '../storage/storage';
-import { LocalStorageService } from '../storage/local-storage/local-storage.service';
-import { SEARCH_CONFIG_TODO } from '../../todos/models/search-config-todo.model';
-import { SearchConfigModule } from './search-config.module';
+import { Storage } from '../../storage/storage';
+import { LocalStorageService } from '../../storage/local-storage/local-storage.service';
+import { SEARCH_CONFIG_TODO } from '../../../todos/models/search-config-todo.model';
+import { SearchConfigModule } from '../search-config.module';
 import { SearchConfigService } from './search-config.service';
 
 let service: SearchConfigService<any>;

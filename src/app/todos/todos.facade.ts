@@ -3,11 +3,11 @@ import { createTempTodo, isTodoTitleValid, Todo } from './models/todo.model';
 import { TodosApi } from './api/todos.api';
 import { TodosState } from './state/todos.state';
 import { Observable } from 'rxjs';
-import { uuid } from '../shared/helpers/uuid';
-import { SearchConfigService } from '../shared/search-config/search-config.service';
+import { SearchConfigService } from '../shared/search-config/services/search-config.service';
 import { debounceTime, distinctUntilChanged, startWith, switchMap, tap } from 'rxjs/operators';
 import { Notification } from '../shared/notification/notification';
 import { SEARCH_TODOS_EXAMPLE_FACTORY } from './factories/search-config-todos-factory';
+import { SearchConfig } from '../shared/search-config/search-config-token';
 
 @Injectable()
 export class TodosFacade {
@@ -34,17 +34,11 @@ export class TodosFacade {
 
   listenToSearchChanges(search$: Observable<string>): void {
     search$.pipe(
-      startWith(this.getInitialSearch()),
       distinctUntilChanged(),
       debounceTime(300),
-      tap(search => this.searchConfigService.updateSearch(search)),
       switchMap(search => this.api.list(search))
     )
     .subscribe(todos => this.state.todos = todos);
-  }
-
-  getInitialSearch(): string {
-    return this.searchConfigService.getInitialValue();
   }
 
   addTodo(title: string): void {
